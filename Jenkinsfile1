@@ -1,32 +1,40 @@
 pipeline{
     agent any
+
     tools {
-        maven 'Maven' 
+        maven 'Maven'
     }
-    }
+
     stages{
+
         stage("Test"){
             steps{
                 sh "mvn test"
                 echo "=======test===="
             }
         }
+
         stage("Build"){
             steps{
                 sh "mvn --version"
-                echo "=========checking version========="            }
+                echo "=========checking version========="
+            }
         }
-            stage("Deploy on test"){
-            steps{
-                echo "========executing A========"
-            }
-            }
-                stage("Depoy on prod"){
+
+        stage("Deploy on test"){
             steps{
                 echo "========executing A========"
             }
         }
-    }
+
+        stage("Deploy on prod"){
+            steps{
+                echo "========executing A========"
+            }
+        }
+
+    }   // ← this bracket was missing
+
     post{
         always{
             echo "========always========"
@@ -38,4 +46,4 @@ pipeline{
             echo "========pipeline execution failed========"
         }
     }
-
+}
