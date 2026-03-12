@@ -1,6 +1,9 @@
 pipeline{
     agent{
-        label "node"
+        label any
+    tools {
+        maven 'apache-maven-3.0.1' 
+    }
     }
     stages{
         stage("Test"){
