@@ -33,7 +33,7 @@ pipeline{
         }
         stage("Deploy on prod"){
             steps{
-                deploy adapters: [tomcat9(alternativeDeploymentContext: '', credentialsId: 'tomcat', path: '', url: 'http://192.168.1.158:8080/')], contextPath: '/app', war: '**/*.war'
+                deploy adapters: [tomcat9(alternativeDeploymentContext: '', credentialsId: 'tomcatd', path: '', url: 'http://192.168.1.158:8080/')], contextPath: '/app', war: '**/*.war'
             }
         }
 
@@ -48,6 +48,7 @@ pipeline{
         }
         failure{
             echo "========pipeline execution failed========"
+            slackSend channel: 'all-jenkinsworkspace', message: 'Failed'
         }
     }
 }
