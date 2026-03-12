@@ -25,9 +25,12 @@ pipeline{
             deploy adapters: [tomcat9(alternativeDeploymentContext: '', credentialsId: 'tomcat', path: '', url: 'http://192.168.1.159:8080/')], contextPath: '/app', war: '**/*.war'
             }
         }
-
+        stage('Approval') {
+            steps {
+                input message: "Do you want to continue to Production?"
+            }
+        }
         stage("Deploy on prod"){
-            input 'do you want to continue'
             steps{
                 deploy adapters: [tomcat9(alternativeDeploymentContext: '', credentialsId: 'tomcat', path: '', url: 'http://192.168.1.158:8080/')], contextPath: '/app', war: '**/*.war'
             }
